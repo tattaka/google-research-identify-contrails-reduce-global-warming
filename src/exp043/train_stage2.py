@@ -283,7 +283,7 @@ class ResidualConv3D(nn.Module):
         return x
 
 
-class ContrailsSegModel(nn.Module):
+class ContrailsSegModel2_5D(nn.Module):
     def __init__(
         self,
         model_name: str = "resnet34",
@@ -548,7 +548,7 @@ class ContrailsLightningSegModel2_5D(pl.LightningModule):
         image_size: int = 256,
         seq_len: int = 7,
     ):
-        self.model = ContrailsSegModel(
+        self.model = ContrailsSegModel2_5D(
             model_name=model_name,
             pretrained=pretrained,
             drop_path_rate=drop_path_rate,
