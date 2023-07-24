@@ -2,7 +2,7 @@
 * 2Dモデル最新版
   * exp044
 * 2.5Dモデル最新版
-  * exp043
+  * exp052
 
 # TODO
 * エラー分析
@@ -48,11 +48,12 @@
   * そうでないならaug強の方が強くなるはず
 
 # IDEA
-* mean teacher?
-  * lossをmseとbceどちらも試す 
-* 最初のstride取るやつ
+* swinやconvnextの1st featureをupsampling+convしてUNetやFastFCNに食わせる
+  * proc: featの数について考えなくても良くなる・FastFCNを使える
+  * cons: 計算量増加・~~なんか精度低い(実装の都合上？)~~
 * coat
-* 320sizeで学習して中心切り取る
+* hrnet(modified_stide)
+* swinv2_base_window12to24_192to384
 * ashデータセットのclipをなくす？
 * deep supervisionでmax pooling
 * coat_lite_medium
@@ -188,6 +189,22 @@
       * valに過学習してない？その割にはtestでも相関取れてそうなのが謎
 * 他フレームにpseudo label
   * 改善が微妙すぎる・計算時間少し増える
+* mean teacher?
+  * lossをmseとbceどちらも試す 
+* 320sizeで学習して中心切り取る
+  * exp043の320と比較する
+  * 立ち上がりは良いけど最終的にはそこまで変わらなくなりそうだし、計算コスト的にボツ
+* 最初のstride取るやつ
+  * exp050のmodel name変える
+* finetune
+  * 2Dで学習して、encoderをfreezeして/しないで学習
+    * しないで学習するのが良さげ
+    * 多少CVは上がる？
+  * 2.5Dで学習してencoderを解像度上げて学習
+  * encoder/decoderのbatchnorm凍結する
+  * 学習が不安定すぎる割にはゲイン少ない
+* random brightness and contrast
+
 
 # 状況整理
 
