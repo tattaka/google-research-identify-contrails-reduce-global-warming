@@ -51,8 +51,8 @@
 * swinやconvnextの1st featureをupsampling+convしてUNetやFastFCNに食わせる
   * proc: featの数について考えなくても良くなる・FastFCNを使える
   * cons: 計算量増加・~~なんか精度低い(実装の都合上？)~~
-* coat
 * hrnet(modified_stide)
+* CSPDarkNet53
 * swinv2_base_window12to24_192to384
 * ashデータセットのclipをなくす？
 * deep supervisionでmax pooling
