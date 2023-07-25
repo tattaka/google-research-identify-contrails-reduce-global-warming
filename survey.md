@@ -2,7 +2,7 @@
 * 2Dモデル最新版
   * exp044
 * 2.5Dモデル最新版
-  * exp052
+  * exp043
 
 # TODO
 * エラー分析
@@ -48,11 +48,6 @@
   * そうでないならaug強の方が強くなるはず
 
 # IDEA
-* swinやconvnextの1st featureをupsampling+convしてUNetやFastFCNに食わせる
-  * 結局convは使わずにupsamplingしてUNetに食わせる
-    * 精度は若干落ちるが誤差の範囲
-  * proc: featの数について考えなくても良くなる・FastFCNを使える
-  * cons: 計算量増加・なんか精度低い(実装の都合上？)
 * hrnet(modified_stide)
 * CSPDarkNet53
 * swinv2_base_window12to24_192to384
@@ -206,7 +201,12 @@
   * encoder/decoderのbatchnorm凍結する
   * 学習が不安定すぎる割にはゲイン少ない
 * random brightness and contrast
-
+* swinやconvnextの1st featureをupsampling+convしてUNetやFastFCNに食わせる
+  * 結局convは使わずにupsamplingしてUNetに食わせる
+    * 精度は若干落ちるが誤差の範囲
+  * proc: featの数について考えなくても良くなる・FastFCNを使える
+  * cons: 計算量増加・なんか精度低い(実装の都合上？)
+  * 結局精度向上ならず・計算量も増えるのでボツ
 
 # 状況整理
 
