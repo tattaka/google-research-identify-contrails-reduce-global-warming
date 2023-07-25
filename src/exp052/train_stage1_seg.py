@@ -308,19 +308,6 @@ class ContrailsSegModel2_5D(nn.Module):
         assert image_size % 32 == 0
         self.image_size = image_size
         num_features = self.encoder.feature_info.channels()
-        self.adding_feat_conv = nn.ModuleList(
-            [
-                nn.Sequential(
-                    nn.Conv2d(num_features[0], num_features[0] // 2, 1, 1),
-                    nn.BatchNorm2d(num_features[0] // 2),
-                    nn.ReLU(),
-                    nn.Conv2d(num_features[0] // 2, num_features[0], 3, 1, 1),
-                    nn.BatchNorm2d(num_features[0]),
-                    nn.ReLU(),
-                )
-                for _ in range(5 - len(num_features))
-            ]
-        )
         num_features = [
             num_features[0] for _ in range(5 - len(num_features))
         ] + num_features
@@ -378,9 +365,7 @@ class ContrailsSegModel2_5D(nn.Module):
                 img_feat.permute(0, 3, 1, 2).contiguous() for img_feat in img_feats
             ]
         for i in range(5 - len(img_feats)):
-            img_feats = [
-                self.adding_feat_conv[i](F.interpolate(img_feats[0], scale_factor=2))
-            ] + img_feats
+            img_feats = [F.interpolate(img_feats[0], scale_factor=2)] + img_feats
         for i in range(len(img_feats)):
             img_feat = img_feats[i]
             _, ch, h, w = img_feat.shape  # (bs * seq_len, ch, h, w)
