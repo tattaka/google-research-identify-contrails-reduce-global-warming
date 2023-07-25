@@ -767,7 +767,7 @@ class ContrailsLightningSegModel2_5D(pl.LightningModule):
         )
         parser.add_argument(
             "--drop_path_rate",
-            default=0.0,
+            default=None,
             type=float,
             metavar="DPR",
             dest="drop_path_rate",

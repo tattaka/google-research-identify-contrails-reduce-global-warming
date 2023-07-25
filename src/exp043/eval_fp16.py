@@ -24,6 +24,7 @@ from train_stage2 import ContrailsLightningSegModel2_5D
 ####### w/o postprocess ##########
 resnetrs50_cls_stage1 + resnetrs50_unet_stage2_ep60 fold0: score: 0.6679135107516655 cls_score: 0.8534075287599444 seg_threshold: 0.9939453125000013 cls_threshold: 0.7203125000000006
 resnetrs101_cls_stage1 + resnetrs101_unet_stage2_ep60 fold0: score: 0.675343171410677 cls_score: 0.8546336476443106 seg_threshold: 0.9940429687500012 cls_threshold: 0.7453125000000007
+swinv2_base_window16_cls_stage1 + swinv2_base_window16_unet_stage2_ep60 fold0: score: 0.66416414563689 cls_score: 0.860594294278285 seg_threshold: 0.9938476562500013 cls_threshold: 0.7175781250000005
 ####### w/o postprocess ##########
 """
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
