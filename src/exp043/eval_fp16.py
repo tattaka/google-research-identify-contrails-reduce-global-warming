@@ -25,6 +25,13 @@ from train_stage2 import ContrailsLightningSegModel2_5D
 resnetrs50_cls_stage1 + resnetrs50_unet_stage2_ep60 fold0: score: 0.6679135107516655 cls_score: 0.8534075287599444 seg_threshold: 0.9939453125000013 cls_threshold: 0.7203125000000006
 resnetrs101_cls_stage1 + resnetrs101_unet_stage2_ep60 fold0: score: 0.675343171410677 cls_score: 0.8546336476443106 seg_threshold: 0.9940429687500012 cls_threshold: 0.7453125000000007
 swinv2_base_window16_cls_stage1 + swinv2_base_window16_unet_stage2_ep60 fold0: score: 0.66416414563689 cls_score: 0.860594294278285 seg_threshold: 0.9938476562500013 cls_threshold: 0.7175781250000005
+swin_base_patch4_window12_cls_stage1 + swin_base_patch4_window12_unet_stage2_ep60 fold0: score: 0.6651262826076711 cls_score: 0.8531593500541892 seg_threshold: 0.9937500000000012 cls_threshold: 0.7179687500000006
+convnext_base_cls_stage1 + convnext_base_unet_cbam_stage2_ep60 fold0: score: 0.6639160962436499 cls_score: 0.8396658564509807 seg_threshold: 0.9935546875000012 cls_threshold: 0.7164062500000006 (clsが弱い)
+resnest101e_cls_stage1_320 + resnest101e_fastfcn_stage2_320_ep60 fold0: score: 0.6626224495096568 cls_score: 0.845724405830093 seg_threshold: 0.9936523437500012 cls_threshold: 0.7179687500000005
+resnetrs101_cls_stage1 + convnext_large_unet_stage2_ep40 fold0: score: 0.6709639300630666 cls_score: 0.8546336476443106 seg_threshold: 0.9938964843750013 cls_threshold: 0.7453125000000007
+resnetrs101_cls_stage1 + resnetrs200_fastfcn_stage2_384_ep50 fold0: score: 0.6738308146834896 cls_score: 0.8546336476443106 seg_threshold: 0.9936523437500012 cls_threshold: 0.7453125000000007
+resnetrs101_cls_stage1 + resnetrs101_512_unet_stage2_ep60 fold0: score: 0.6716760836995505 cls_score: 0.8546336476443106 seg_threshold: 0.9937500000000012 cls_threshold: 0.7453125000000007
+resnetrs101_cls_stage1 + convnext_base_512_unet_stage2_ep50 fold0: score: 0.6735206050490438 cls_score: 0.8546336476443106 seg_threshold: 0.9937500000000012 cls_threshold: 0.7453125000000007
 ####### w/o postprocess ##########
 """
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

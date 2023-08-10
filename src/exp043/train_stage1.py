@@ -644,7 +644,13 @@ class ContrailsLightningModel2_5D(pl.LightningModule):
 
         loss_target["targets"] = label
         losses = self.calc_loss(outputs, loss_target)
-
+        if torch.isnan(losses["loss"]):
+            print("Rollback previous model weight!")
+            self.model_ema.set(self.model)
+            image, label = batch
+            outputs["cls_logits"] = self.model_ema.module(image)
+            loss_target["targets"] = label
+            losses = self.calc_loss(outputs, loss_target)
         step_output.update(losses)
         self.cls_logit_val.append(
             torch.sigmoid(outputs["cls_logits"]).detach().cpu().numpy()

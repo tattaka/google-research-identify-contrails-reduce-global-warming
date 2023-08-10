@@ -23,7 +23,7 @@ from train_stage2 import ContrailsLightningSegModel2_5D
 
 """
 ####### w/o postprocess ##########
-fold0: score: 0.6857790176195541 cls_score: 0.8614227199290305 seg_threshold: 0.9933593750000013(0.3466796875) cls_threshold: 0.7218750000000005(0.3066787719726567)
+fold0: score: 0.6952059140140283 cls_score: 0.8796291282478833 seg_threshold: 0.9935546875000012(0.34765625) cls_threshold: 0.7156250000000006(0.2546157836914079)
 ####### w/o postprocess ##########
 """
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -51,23 +51,27 @@ def get_args() -> argparse.Namespace:
 model_confs = {
     "logdir_cls": [
         "resnetrs101_cls_stage1",
-        "swinv2_base_window16_cls_stage1",
+        "convnext_base_cls_stage1",
         "swin_base_patch4_window12_cls_stage1",
-        "resnetrs50_cls_stage1",
+        "resnest101e_cls_stage1_320",
     ],
     "logdir_stage1_seg": [
+        "resnetrs50_unet_stage1_ep30",
         "resnetrs101_unet_stage1_ep30",
         "swinv2_base_window16_unet_stage1_ep30",
         "swin_base_patch4_window12_unet_stage1_ep30",
-        "resnetrs50_unet_stage1_ep30",
-        "convnext_base_unet_stage1_ep30",
+        "convnext_base_unet_cbam_stage1_ep30",
+        "resnest101e_fastfcn_stage1_320_ep30",
+        "convnext_large_unet_stage1_ep20",
     ],
     "logdir_seg": [
+        "resnetrs50_unet_stage2_ep60",
         "resnetrs101_unet_stage2_ep60",
         "swinv2_base_window16_unet_stage2_ep60",
         "swin_base_patch4_window12_unet_stage2_ep60",
-        "resnetrs50_unet_stage2_ep60",
-        "convnext_base_unet_stage2_ep60",
+        "convnext_base_unet_cbam_stage2_ep60",
+        "resnest101e_fastfcn_stage2_320_ep60",
+        "convnext_large_unet_stage2_ep40",
     ],
 }
 
@@ -131,7 +135,7 @@ def main(args):
         train_df=train_df,
         valid_df=valid_df,
         num_workers=args.num_workers,
-        batch_size=args.batch_size,
+        batch_size=4,
     ).test_dataloader()
     for batch in tqdm(dataloader):
         image, label = batch
@@ -196,7 +200,7 @@ def main(args):
         train_df=train_df,
         valid_df=valid_df[cls_preds_all[:, 0] > 0.5],
         num_workers=args.num_workers,
-        batch_size=args.batch_size,
+        batch_size=4,
     ).test_dataloader()
     for batch in tqdm(dataloader):
         image, label = batch

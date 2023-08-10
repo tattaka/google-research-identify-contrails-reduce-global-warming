@@ -24,7 +24,7 @@ from torch.optim import AdamW
 from torch.utils.data import DataLoader, Dataset
 from transformers import get_cosine_schedule_with_warmup
 
-EXP_ID = "055"
+EXP_ID = "043"
 COMMENT = """
     classification + normalize + heavy augmentations + post_conv3d + seq_len option + cutout + reverse_video_aug + use indivisual mask
     """
@@ -650,13 +650,13 @@ class ContrailsLightningModel2_5D(pl.LightningModule):
 
         loss_target["targets"] = label
         losses = self.calc_loss(outputs, loss_target)
-        if torch.isnan(losses["loss"]):
-            print("Rollback previous model weight!")
-            self.model_ema.set(self.model)
-            image, label = batch
-            outputs["cls_logits"] = self.model_ema.module(image)
-            loss_target["targets"] = label
-            losses = self.calc_loss(outputs, loss_target)
+        # if torch.isnan(losses["loss"]):
+        #     print("Rollback previous model weight!")
+        #     self.model_ema.set(self.model)
+        #     image, label = batch
+        #     outputs["cls_logits"] = self.model_ema.module(image)
+        #     loss_target["targets"] = label
+        #     losses = self.calc_loss(outputs, loss_target)
         step_output.update(losses)
         self.cls_logit_val.append(
             torch.sigmoid(outputs["cls_logits"]).detach().cpu().numpy()

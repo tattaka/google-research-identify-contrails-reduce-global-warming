@@ -22,7 +22,15 @@ from train_stage2 import ContrailsLightningSegModel2_5D
 
 """
 ####### w/o postprocess ##########
-resnetrs50_256_cls_stage1 + resnetrs50_256_unet_stage2_ep60 fold0: score: 0.6759425114922151 cls_score: 0.8607362460154878 seg_threshold: 0.9936523437500012 cls_threshold: 0.6976562500000005
+resnetrs50_cls_stage1 + resnetrs50_256_unet_stage2_ep60 fold0: score: 0.6767507655362093 cls_score: 0.8534075287599444 seg_threshold: 0.9936523437500012(0.94580078125) cls_threshold: 0.7203125000000006(0.32561492919921986)
+resnetrs101_cls_stage1 + resnetrs101_384_unet_stage2_ep60 fold0: score: 0.6794366053522322 cls_score: 0.8546336476443106 seg_threshold: 0.9933593750000013(0.95166015625) cls_threshold: 0.7453125000000007(0.4987239837646501)
+convnext_base_cls_stage1 + convnext_base_256_unet_cbam_stage2_ep60 fold0: score: 0.6672015078455318 cls_score: 0.8396658564509807 seg_threshold: 0.9936523437500012(0.95068359375) cls_threshold: 0.7164062500000006(0.11140966415405343)
+resnest101e_cls_stage1_320 + resnest101e_320_fastfcn_stage2_ep60 fold0: score: 0.6712102127310827 cls_score: 0.845724405830093 seg_threshold: 0.9936523437500012(0.94873046875) cls_threshold: 0.7179687500000005(0.3080625534057633)
+resnetrs101_cls_stage1 + convnext_large_384_unet_stage2_ep40 fold0: score: 0.6707800037759941 cls_score: 0.8546336476443106 seg_threshold: 0.9933593750000013(0.951171875) cls_threshold: 0.7453125000000007(0.4987239837646501)
+resnetrs101_cls_stage1 + resnetrs101_512_unet_stage2_ep60 fold0: score: 0.6748742244726561 cls_score: 0.8546336476443106 seg_threshold: 0.9936523437500012(0.95947265625) cls_threshold: 0.7453125000000007(0.4987239837646501)
+resnetrs101_cls_stage1 + resnetrs101_512_fastfcn_stage2_ep50 fold0: score: 0.6708517039604829 cls_score: 0.8546336476443106 seg_threshold: 0.9936523437500012(0.95703125) cls_threshold: 0.7453125000000007(0.4987239837646501)
+resnetrs101_cls_stage1 + convnext_base_512_unet_stage2_ep50 fold0: score: 0.6669293399578479 cls_score: 0.8546336476443106 seg_threshold: 0.9935546875000012(0.95458984375) cls_threshold: 0.7453125000000007(0.4987239837646501)
+resnetrs101_cls_stage1 + convnext_base_512_unet_cbam_stage2_ep30 fold0: score: 0.6825580189136958 cls_score: 0.8747623078147367 seg_threshold: 0.9937500000000012(0.7998046875) cls_threshold: 0.7296875000000006(0.45517921447754267)
 ####### w/o postprocess ##########
 """
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -156,7 +164,7 @@ def main(args):
             seg_logits_all[i],
         )
     print(
-        f"{args.logdir_cls} + {args.logdir_seg} fold0: score: {score} cls_score: {cls_score} seg_threshold: {seg_threshold_percent} cls_threshold: {cls_threshold_percent}"
+        f"{args.logdir_cls} + {args.logdir_seg} fold0: score: {score} cls_score: {cls_score} seg_threshold: {seg_threshold_percent}({seg_threshold}) cls_threshold: {cls_threshold_percent}({cls_threshold})"
     )
 
 
