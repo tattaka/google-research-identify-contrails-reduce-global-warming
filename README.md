@@ -13,7 +13,7 @@ Use [Kaggle Docker v134](https://console.cloud.google.com/gcr/images/kaggle-gpu-
 2. Training
     ```bash
     $ cd src/exp043 && sh train.sh
-    $ cd exp055 && sh train.sh
+    $ cd src/exp055 && sh train.sh
     ```
     `exp043` is a hard label and `exp055` is a soft label experiment.
 
