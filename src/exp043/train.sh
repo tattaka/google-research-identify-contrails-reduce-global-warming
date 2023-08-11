@@ -1,6 +1,6 @@
-python train_stage1.py --seed 2024 --model_name resnetrs50 --drop_path_rate 0.2 \
-    --lr 1e-3 --batch_size 4 --image_size 256 \
-    --fold 0 --gpus 4 --epochs 30 --logdir resnetrs50_cls_stage1 --num_workers 6 --disable_compile
+# python train_stage1.py --seed 2024 --model_name resnetrs50 --drop_path_rate 0.2 \
+#     --lr 1e-3 --batch_size 4 --image_size 256 \
+#     --fold 0 --gpus 4 --epochs 30 --logdir resnetrs50_cls_stage1 --num_workers 6 --disable_compile
 
 python train_stage2.py --seed 2024 --model_name resnetrs50 --drop_path_rate 0.4 \
     --lr 1e-3 --batch_size 4 --image_size 256 \
@@ -20,9 +20,9 @@ python eval_fp16_v2_sub.py --batch_size 4  --fold 0 \
     --logdir_cls resnetrs50_cls_stage1 --logdir_seg resnetrs50_unet_stage2_ep60 --logdir_stage1_seg resnetrs50_unet_stage1_ep30 --num_workers 6
 
 
-# python train_stage1.py --seed 3023 --model_name resnetrs101 --drop_path_rate 0.2 \
-#     --lr 1e-3 --batch_size 4 --image_size 384 --seq_len 5 \
-#     --fold 0 --gpus 4 --epochs 30 --logdir resnetrs101_cls_stage1 --num_workers 6 --disable_compile
+python train_stage1.py --seed 3023 --model_name resnetrs101 --drop_path_rate 0.2 \
+    --lr 1e-3 --batch_size 4 --image_size 384 --seq_len 5 \
+    --fold 0 --gpus 4 --epochs 30 --logdir resnetrs101_cls_stage1 --num_workers 6 --disable_compile
 
 python train_stage2.py --seed 3024 --model_name resnetrs101 --drop_path_rate 0.4 \
     --lr 1e-3 --batch_size 4 --image_size 384 --seq_len 5  \
@@ -156,44 +156,22 @@ python eval_fp16_v2_sub.py --batch_size 16  --fold 0 \
 #     --lr 1e-3 --batch_size 2 --image_size 384 --seq_len 7 \
 #     --fold 0 --gpus 4 --epochs 25 --logdir resnetrs200_cls_stage1_384 --num_workers 6 --disable_compile
 
-python train_stage2.py --seed 10024 --model_name resnetrs200 \
-    --lr 1e-3 --batch_size 2 --image_size 384 --decoder_type FastFCNImprove --seq_len 7 \
-    --fold 0 --gpus 4 --epochs 50 --logdir resnetrs200_fastfcn_stage2_384_ep50 --num_workers 6  --disable_compile
+# python train_stage2.py --seed 10024 --model_name resnetrs200 \
+#     --lr 1e-3 --batch_size 2 --image_size 384 --decoder_type FastFCNImprove --seq_len 7 \
+#     --fold 0 --gpus 4 --epochs 50 --logdir resnetrs200_fastfcn_stage2_384_ep50 --num_workers 6  --disable_compile
 
-python train_stage1_seg.py --seed 10025 --model_name resnetrs200 \
-    --lr 1e-3 --batch_size 2 --image_size 384 --decoder_type FastFCNImprove --seq_len 7 \
-    --fold 0 --gpus 4 --epochs 25 --logdir resnetrs200_fastfcn_stage1_384_ep25 --num_workers 6  --disable_compile
+# python train_stage1_seg.py --seed 10025 --model_name resnetrs200 \
+#     --lr 1e-3 --batch_size 2 --image_size 384 --decoder_type FastFCNImprove --seq_len 7 \
+#     --fold 0 --gpus 4 --epochs 25 --logdir resnetrs200_fastfcn_stage1_384_ep25 --num_workers 6  --disable_compile
 
-python eval_fp16.py --batch_size 16  --fold 0 \
-    --logdir_cls resnetrs101_cls_stage1 --logdir_seg resnetrs200_fastfcn_stage2_384_ep50 --num_workers 6
+# python eval_fp16.py --batch_size 16  --fold 0 \
+#     --logdir_cls resnetrs101_cls_stage1 --logdir_seg resnetrs200_fastfcn_stage2_384_ep50 --num_workers 6
 
-python eval_fp16_v2.py --batch_size 16  --fold 0 \
-    --logdir_cls resnetrs101_cls_stage1 --logdir_seg resnetrs200_fastfcn_stage2_384_ep50 --logdir_stage1_seg resnetrs200_fastfcn_stage1_384_ep25 --num_workers 6
+# python eval_fp16_v2.py --batch_size 16  --fold 0 \
+#     --logdir_cls resnetrs101_cls_stage1 --logdir_seg resnetrs200_fastfcn_stage2_384_ep50 --logdir_stage1_seg resnetrs200_fastfcn_stage1_384_ep25 --num_workers 6
 
-python eval_fp16_v2_sub.py --batch_size 16  --fold 0 \
-    --logdir_cls resnetrs101_cls_stage1 --logdir_seg resnetrs200_fastfcn_stage2_384_ep50 --logdir_stage1_seg resnetrs200_fastfcn_stage1_384_ep25 --num_workers 6
-
-
-# python train_stage1.py --seed 20023 --model_name swinv2_base_window12to24_192to384.ms_in22k_ft_in1k \
-#     --drop_path_rate 0.2 --backbone_lr 2e-4 --lr 1e-3 --batch_size 1 --image_size 384 --seq_len 5  \
-#     --fold 0 --gpus 4 --epochs 30 --logdir swinv2_base_window12to24_cls_stage1 --num_workers 6 --disable_compile
-
-python train_stage2.py --seed 20024 --model_name swinv2_base_window12to24_192to384.ms_in22k_ft_in1k \
-     --drop_path_rate 0.4 --backbone_lr 2e-4 --lr 1e-3 --batch_size 1 --image_size 384 --seq_len 5  \
-    --fold 0 --gpus 4 --epochs 40 --logdir swinv2_base_window12to24_unet_stage2_ep40 --num_workers 6 --disable_compile
-
-python train_stage1_seg.py --seed 20025 --model_name swinv2_base_window12to24_192to384.ms_in22k_ft_in1k \
-     --drop_path_rate 0.4 --backbone_lr 2e-4 --lr 1e-3 --batch_size 1 --image_size 384 --seq_len 5  \
-    --fold 0 --gpus 4 --epochs 20 --logdir swinv2_base_window12to24_unet_stage1_ep20 --num_workers 6 --disable_compile
-
-python eval_fp16.py --batch_size 4  --fold 0 \
-    --logdir_cls swinv2_base_window12to24_cls_stage1 --logdir_seg swinv2_base_window12to24_unet_stage2_ep40 --num_workers 6
-
-python eval_fp16_v2.py --batch_size 4  --fold 0 --logdir_cls swinv2_base_window12to24_cls_stage1 \
-    --logdir_seg swinv2_base_window12to24_unet_stage2_ep40 --logdir_stage1_seg swinv2_base_window12to24_unet_stage1_ep20 --num_workers 6
-
-python eval_fp16_v2_sub.py --batch_size 16  --fold 0 --logdir_cls swinv2_base_window12to24_cls_stage1 \
-    --logdir_seg swinv2_base_window12to24_unet_stage2_ep40 --logdir_stage1_seg swinv2_base_window12to24_unet_stage1_ep20 --num_workers 6
+# python eval_fp16_v2_sub.py --batch_size 16  --fold 0 \
+#     --logdir_cls resnetrs101_cls_stage1 --logdir_seg resnetrs200_fastfcn_stage2_384_ep50 --logdir_stage1_seg resnetrs200_fastfcn_stage1_384_ep25 --num_workers 6
 
 
 # python train_stage1.py --seed 3023 --model_name resnetrs101 --drop_path_rate 0.2 \
